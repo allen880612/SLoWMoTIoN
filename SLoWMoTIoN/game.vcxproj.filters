@@ -216,5 +216,17 @@
     <Image Include="res\map2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="RES\IDB_MAP0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\IDB_MAP1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="RES\IDB_MAP2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap8.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
