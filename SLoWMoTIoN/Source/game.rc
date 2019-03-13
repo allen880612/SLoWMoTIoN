@@ -116,6 +116,10 @@ ID_RED                  BITMAP                  "..\\res\\id_green.bmp"
 
 IDB_MAP0                BITMAP                  "..\\res\\bmp00002.bmp"
 
+IDB_MAP1                BITMAP                  "..\\res\\map1.bmp"
+
+IDB_MAP2                BITMAP                  "..\\res\\map2.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

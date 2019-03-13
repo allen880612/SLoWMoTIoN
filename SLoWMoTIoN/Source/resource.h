@@ -44,6 +44,8 @@
 #define ID_GREEN1                       162
 #define IDB_BITMAP4                     162
 #define IDB_MAP0                        162
+#define IDB_MAP1                        163
+#define IDB_MAP2                        164
 #define IDC_README                      1001
 #define ID_FILE_PAUSE                   32771
 #define ID_TOGGLE_FULLSCREEN            32772

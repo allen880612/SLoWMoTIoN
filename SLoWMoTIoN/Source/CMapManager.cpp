@@ -45,14 +45,20 @@ namespace game_framework
 	{
 		return blockMap[nowMap].rightMap;
 	}
+
+	int CMapManager::GetLoadMap()
+	{
+		return loadMap;
+	}
 #pragma endregion
 
 	void CMapManager::ChangeMap(int changeMap)
 	{
 		nowMap = changeMap;
+		loadMap = blockMap[nowMap].loadMap;
 	}
 
-	void CMapManager::LoadBitmap(int loadMap)
+	void CMapManager::LoadMapBitmap(int loadMap)
 	{
 		bmp.LoadBitmap(loadMap);
 	}
@@ -71,15 +77,15 @@ namespace game_framework
 			{
 				//順序：目前 上 下 左 右 ， -1表示不存在
 			case 0:
-				blockMap[mapIndex] = CBlockMap(mapIndex, -1, -1, 1, 2, 132);
+				blockMap[mapIndex] = CBlockMap(mapIndex, -1, -1, 1, 2, IDB_MAP0);
 				break;
 
 			case 1:
-				blockMap[mapIndex] = CBlockMap(mapIndex, -1, -1, -1, 0, 111);
+				blockMap[mapIndex] = CBlockMap(mapIndex, -1, -1, -1, 0, IDB_MAP1);
 				break;
 
 			case 2:
-				blockMap[mapIndex] = CBlockMap(mapIndex, -1, -1, 0, -1, 123);
+				blockMap[mapIndex] = CBlockMap(mapIndex, -1, -1, 0, -1, IDB_MAP2);
 				break;
 
 			default:

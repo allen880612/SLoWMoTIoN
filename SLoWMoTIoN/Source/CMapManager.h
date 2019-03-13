@@ -12,10 +12,11 @@ namespace game_framework
 		int GetDownMap();
 		int GetLeftMap();
 		int GetRightMap();
+		int GetLoadMap();
 
 		void ChangeMap(int);
 		void onShow();
-		void LoadBitmap(int);
+		void LoadMapBitmap(int);
 
 	protected:
 		CMovingBitmap bmp;

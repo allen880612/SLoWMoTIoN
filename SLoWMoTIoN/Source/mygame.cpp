@@ -310,7 +310,7 @@ namespace game_framework {
 																	//
 																	// 此OnInit動作會接到CGameStaterOver::OnInit()，所以進度還沒到100%
 																	//
-		mapManager.LoadBitmap(IDB_MAP0);
+		mapManager.LoadMapBitmap(mapManager.GetLoadMap());
 #pragma region MyRegion
 
 #pragma endregion
@@ -352,6 +352,8 @@ namespace game_framework {
 			{
 				eraser.SetMovingLeft(true);
 			}
+			mapManager.ChangeMap(mapManager.GetLeftMap());
+			mapManager.LoadMapBitmap(mapManager.GetLoadMap());
 		}
 		if (nChar == KEY_RIGHT)
 		{
@@ -378,6 +380,9 @@ namespace game_framework {
 			{
 				eraser.SetMovingRight(true);
 			}
+
+			mapManager.ChangeMap(mapManager.GetRightMap());
+			mapManager.LoadMapBitmap(mapManager.GetLoadMap());
 		}
 		if (nChar == KEY_UP)
 			eraser.SetMovingUp(true);
