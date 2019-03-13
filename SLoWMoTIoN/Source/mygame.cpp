@@ -221,9 +221,9 @@ namespace game_framework {
 		help.SetTopLeft(0, SIZE_Y - help.Height());			// 設定說明圖的起始座標
 		hits_left.SetInteger(HITS_LEFT);					// 指定剩下的撞擊數
 		hits_left.SetTopLeft(HITS_LEFT_X, HITS_LEFT_Y);		// 指定剩下撞擊數的座標
-		CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
-		CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
-		CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
+		//CAudio::Instance()->Play(AUDIO_LAKE, true);			// 撥放 WAVE
+		//CAudio::Instance()->Play(AUDIO_DING, false);		// 撥放 WAVE
+		//CAudio::Instance()->Play(AUDIO_NTUT, true);			// 撥放 MIDI
 	}
 
 	void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -250,6 +250,48 @@ namespace game_framework {
 		//
 		// 移動擦子
 		//
+		#pragma region - 左右界地圖檢查 - 卡邊界or換地圖 -
+		#pragma region -- 右邊有地圖且人物往右邊行走 --
+		if (eraser.GetX2() >= SIZE_X && mapManager.GetRightMap() >= 0 && eraser.GetMovingRight())
+		{
+			#pragma region --- 超過邊界 - 換地圖---
+			if (eraser.GetX1() >= SIZE_X)
+			{
+				eraser.SetXY(0 - (eraser.GetX2() - eraser.GetX1()), eraser.GetY1());
+				mapManager.ChangeMap(mapManager.GetRightMap());
+			}
+			#pragma endregion
+		}
+		#pragma endregion
+
+		#pragma region -- 右邊沒有地圖且人物往右邊行走 --
+		if (eraser.GetX2() >= SIZE_X && mapManager.GetRightMap() < 0 && eraser.GetMovingRight())
+		{
+			eraser.SetMovingRight(false); //沒有地圖，卡邊界
+		}
+		#pragma endregion
+
+		#pragma region -- 左邊有地圖且人物往左邊行走 --
+		if (eraser.GetX1() <= 0 && mapManager.GetLeftMap() >= 0 && eraser.GetMovingLeft())
+		{
+			#pragma region --- 超過邊界 - 換地圖---
+			if (eraser.GetX2() <= 0) //超過邊界，換地圖
+			{
+				eraser.SetXY(SIZE_X + (eraser.GetX2() - eraser.GetX1()), eraser.GetY1());
+				mapManager.ChangeMap(mapManager.GetLeftMap());
+			}
+			#pragma endregion
+		}
+		#pragma endregion
+
+		#pragma region -- 左邊沒有地圖且人物往左邊行走 --
+		if (eraser.GetX1() <= 0 && mapManager.GetLeftMap() < 0 && eraser.GetMovingLeft())
+		{
+			eraser.SetMovingLeft(false); //沒有地圖，卡邊界
+		}
+		#pragma endregion
+		#pragma endregion
+
 		eraser.OnMove();
 		//
 		// 判斷擦子是否碰到球
@@ -324,63 +366,17 @@ namespace game_framework {
 		const char KEY_UP = 0x26; // keyboard上箭頭
 		const char KEY_RIGHT = 0x27; // keyboard右箭頭
 		const char KEY_DOWN = 0x28; // keyboard下箭頭
-
 									//對人物左右行走的地方要留在主程式判斷or在人物行走的時候判斷?
 									//或者是在人物裡面做判斷可否行走(?)函數
 		if (nChar == KEY_LEFT)
 		{
-			if (eraser.GetX1() < 0) //行走到左邊界
-			{
-				if (mapManager.GetLeftMap()) //左邊有地圖
-				{
-					if (eraser.GetX2() > 0) //身體還沒沒入邊界
-					{
-						eraser.SetMovingLeft(true);
-					}
-					else //身體沒入邊界，停止行走，並轉換地圖
-					{
-						eraser.SetMovingLeft(false);
-						//changeMap
-					}
-				}
-				else //沒地圖，停止行走
-				{
-					eraser.SetMovingLeft(false);
-				}
-			}
-			else
-			{
-				eraser.SetMovingLeft(true);
-			}
-			mapManager.ChangeMap(mapManager.GetLeftMap());
+			eraser.SetMovingLeft(true);
+			//mapManager.ChangeMap(mapManager.GetLeftMap());
 		}
 		if (nChar == KEY_RIGHT)
 		{
-			if (eraser.GetX2() >= SIZE_X) //行走到右邊界
-			{
-				if (mapManager.GetRightMap()) //右邊有地圖
-				{
-					if (eraser.GetX1() < SIZE_X) //身體還沒 沒入邊界
-					{
-						eraser.SetMovingRight(true);
-					}
-					else //身體沒入邊界，停止行走，並轉換地圖
-					{
-						eraser.SetMovingRight(false);
-						//changeMap
-					}
-				}
-				else //沒地圖，停止行走
-				{
-					eraser.SetMovingRight(false);
-				}
-			}
-			else
-			{
-				eraser.SetMovingRight(true);
-			}
-
-			mapManager.ChangeMap(mapManager.GetRightMap());
+			eraser.SetMovingRight(true);
+			//mapManager.ChangeMap(mapManager.GetRightMap());
 		}
 		if (nChar == KEY_UP)
 			eraser.SetMovingUp(true);
@@ -448,6 +444,8 @@ namespace game_framework {
 		for (int i = 0; i < NUMBALLS; i++)
 			ball[i].OnShow();				// 貼上第i號球
 		bball.OnShow();						// 貼上彈跳的球
+
+		mapManager.onShow();
 		eraser.OnShow();					// 貼上擦子
 											//
 											//  貼上左上及右下角落的圖
@@ -457,9 +455,9 @@ namespace game_framework {
 		corner.SetTopLeft(SIZE_X - corner.Width(), SIZE_Y - corner.Height());
 		corner.ShowBitmap();
 		//貼上MIKU
-		mapManager.onShow();
 		miku.onShow();
 
+		printf("x = %d\n", eraser.GetX1());
 	}
 	CMiku::CMiku()
 	{
