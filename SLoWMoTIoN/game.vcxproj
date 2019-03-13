@@ -332,9 +332,6 @@
   <ItemGroup>
     <Image Include="..\..\Pictures\2.bmp" />
     <Image Include="..\..\Pictures\bitmap4.bmp" />
-    <Image Include="C:\Users\allen\Pictures\素材\IDB_MAP0.bmp" />
-    <Image Include="C:\Users\allen\Pictures\素材\IDB_MAP1.bmp" />
-    <Image Include="C:\Users\allen\Pictures\素材\IDB_MAP2.bmp" />
     <Image Include="res\bitmap3.bmp" />
     <Image Include="res\bitmap4.bmp" />
     <Image Include="res\bmp00001.bmp" />
