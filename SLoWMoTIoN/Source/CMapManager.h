@@ -16,11 +16,7 @@ namespace game_framework
 
 		void ChangeMap(int);
 		void onShow();
-		void LoadMapBitmap(int);
-
-	protected:
-		CMovingBitmap bmp;
-
+		void LoadMapBitmap();
 	private:
 		const int MAX_MAP_NUMBER = 3;
 		int nowMap;

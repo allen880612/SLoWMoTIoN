@@ -11,5 +11,6 @@ namespace game_framework
 		int nowMap; //目前地圖的編號
 		int leftMap, rightMap, upMap, downMap; //目前地圖，其上下左右地圖的編號 ( < 0代表不存在)
 		int loadMap; //載入的地圖資訊 (IDB_???好像是用#define成數字存的??不確定)
+		CMovingBitmap backgroundBitmap; //背景圖片 (用LoadBitmap讀取loadMap)
 	};
 }

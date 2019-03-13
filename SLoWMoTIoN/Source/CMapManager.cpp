@@ -58,15 +58,10 @@ namespace game_framework
 		loadMap = blockMap[nowMap].loadMap;
 	}
 
-	void CMapManager::LoadMapBitmap(int loadMap)
+	void CMapManager::onShow() //顯示對應到的blockMap圖片 (nowMap = 1, 顯示blockMap[1]的background, 類推)
 	{
-		bmp.LoadBitmap(loadMap);
-	}
-
-	void CMapManager::onShow()
-	{
-		bmp.SetTopLeft(0, 0);
-		bmp.ShowBitmap();
+		blockMap[nowMap].backgroundBitmap.SetTopLeft(0, 0);
+		blockMap[nowMap].backgroundBitmap.ShowBitmap();
 	}
 
 	void CMapManager::InitializeCBlockMap()
@@ -89,9 +84,17 @@ namespace game_framework
 				break;
 
 			default:
-				blockMap[mapIndex] = CBlockMap(-1, -1, -1, -1, -1, 0);
+				blockMap[mapIndex] = CBlockMap(-1, -1, -1, -1, -1, IDB_MAP0);
 				break;
 			}
+		}
+	}
+
+	void CMapManager::LoadMapBitmap() //如字面意思，LoadMapBitmap，在GameStateRun:OnInit運行，一次性load blockMap的所有圖片
+	{
+		for (int mapIndex = 0; mapIndex < MAX_MAP_NUMBER; mapIndex++)
+		{
+			blockMap[mapIndex].backgroundBitmap.LoadBitmapA(blockMap[mapIndex].loadMap);
 		}
 	}
 }
