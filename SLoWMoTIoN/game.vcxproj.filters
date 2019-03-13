@@ -225,5 +225,14 @@
     <Image Include="RES\IDB_MAP2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="C:\Users\allen\Pictures\素材\IDB_MAP0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\allen\Pictures\素材\IDB_MAP1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\allen\Pictures\素材\IDB_MAP2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
