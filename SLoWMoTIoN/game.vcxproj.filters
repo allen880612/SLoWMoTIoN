@@ -225,8 +225,11 @@
     <Image Include="RES\IDB_MAP2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+<<<<<<< HEAD
     <Image Include="res\bitmap8.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+=======
+>>>>>>> 1ad9adbb077f17d2a8673e943faf49131db44627
   </ItemGroup>
 </Project>
